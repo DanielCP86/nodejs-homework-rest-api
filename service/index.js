@@ -33,8 +33,12 @@ const getUserById = (id) => {
   return userModel.findOne({ _id: id });
 };
 
-const addUser = ({ email, password, subscription }) => {
-  return userModel.create({ email, password, subscription });
+const addUser = ({ email, password, subscription, avatarURL }) => {
+  return userModel.create({ email, password, subscription, avatarURL });
+};
+
+const updateUser = (id, fields) => {
+  return userModel.findByIdAndUpdate({ _id: id }, fields, { new: true });
 };
 
 const addTokenToUser = (id, token) => {
@@ -58,4 +62,5 @@ module.exports = {
   userSchemas,
   addTokenToUser,
   getUserById,
+  updateUser,
 };
