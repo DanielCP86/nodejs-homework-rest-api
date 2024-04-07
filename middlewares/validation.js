@@ -13,6 +13,22 @@ const validateRegister = (req, res, next) => {
   next();
 };
 
+const validateResendVerificationEmail = (req, res, next) => {
+  const { error } = userSchemas.resendVerificationEmailSchema.validate(
+    req.body
+  );
+  if (error) {
+    return res.status(400).json({
+      status: "Bad Request",
+      code: 400,
+      message:
+        "Eroare de la librăria Joi sau o altă librărie de validare (missing required field email)",
+      data: error.message,
+    });
+  }
+  next();
+};
+
 const validateLogin = (req, res, next) => {
   const { error } = userSchemas.loginSchema.validate(req.body);
   if (error) {
@@ -71,4 +87,5 @@ module.exports = {
   validateAddContact,
   validateUpdateContact,
   validateUpdateStatusContact,
+  validateResendVerificationEmail,
 };
