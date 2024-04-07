@@ -33,8 +33,24 @@ const getUserById = (id) => {
   return userModel.findOne({ _id: id });
 };
 
-const addUser = ({ email, password, subscription, avatarURL }) => {
-  return userModel.create({ email, password, subscription, avatarURL });
+const getUserByVerificationToken = (verificationToken) => {
+  return userModel.findOne({ verificationToken: verificationToken });
+};
+
+const addUser = ({
+  email,
+  password,
+  subscription,
+  avatarURL,
+  verificationToken,
+}) => {
+  return userModel.create({
+    email,
+    password,
+    subscription,
+    avatarURL,
+    verificationToken,
+  });
 };
 
 const updateUser = (id, fields) => {
@@ -62,5 +78,6 @@ module.exports = {
   userSchemas,
   addTokenToUser,
   getUserById,
+  getUserByVerificationToken,
   updateUser,
 };
